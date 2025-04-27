@@ -21,11 +21,27 @@ class Tree
     return root_node
   end
 
-  def insert
+  def insert(value)
+    current_node = @root
 
+    while current_node
+      if current_node.data == value
+        p "This Node already exists"
+        return
+      end
+
+      if current_node.data > value
+        return current_node.left = Node.new(value) if !current_node.left
+        current_node = current_node.left
+      else
+        return current_node.right = Node.new(value) if !current_node.right
+        current_node = current_node.right
+      end
+
+    end
   end
 
-  def insert
+  def delete(value)
 
   end
 
