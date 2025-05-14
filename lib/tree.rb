@@ -22,27 +22,64 @@ class Tree
   end
 
   def insert(value)
+    return "Wrong input!" if value.class != Integer
     current_node = @root
 
     while current_node
       if current_node.data == value
         p "This Node already exists"
         return
-      end
-
-      if current_node.data > value
+      elsif current_node.data > value
         return current_node.left = Node.new(value) if !current_node.left
         current_node = current_node.left
       else
         return current_node.right = Node.new(value) if !current_node.right
         current_node = current_node.right
       end
-
     end
   end
 
-  def delete(value)
+  def get_successor(current) #Find smallest successor
+    current = current.right
+    while !current && !current.left
+      current = current.left
+    end
+  end
 
+  def delete(current = @root,value) #Recursive approach
+
+    return nil if !current
+
+    if current.data > value #?Search both sides untill you current.data == value
+      current.left = delete(current.left,value)
+    elsif current.data < value #?Search both sides untill you current.data == value
+      current.right = delete(current.right,value)
+
+    else
+      return current.right if !current.left #?Return
+      return current.left if !current.right #?Return
+
+      successor = get_successor(current)
+      current.data = successor.data #Swap the current one with its successor
+      current.right = delete(current.right,successor.data) #Delete the twin
+    end
+
+    return current
+  end
+
+  def find(value)
+    current = @root
+
+    while current
+      if current.data > value
+        current = current.left
+      elsif current.data < value
+        current = current.right
+      else
+        return current
+      end
+    end
+    return "Value not found in the tree"
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)

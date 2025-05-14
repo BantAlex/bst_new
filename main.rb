@@ -6,6 +6,11 @@ tree = Tree.new(array)
 tree.pretty_print
 tree.insert(2)
 tree.insert(9)
-tree.insert(2)
 tree.insert(100)
 tree.pretty_print
+tree.delete(100)
+tree.pretty_print
+tree.delete(12)
+tree.pretty_print
+p tree.find(100)
+p tree.find(2)
