@@ -14,3 +14,4 @@ tree.delete(12)
 tree.pretty_print
 p tree.find(100)
 p tree.find(2)
+p tree.level_order #6,4,11,3,5,7,88,2,9

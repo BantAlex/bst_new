@@ -82,6 +82,44 @@ class Tree
     return "Value not found in the tree"
   end
 
+  # def level_order(current = @root) #Attepmpt at recursion
+  #   return if !current
+  #   queue = []
+  #   queue << current && current.left && current.right
+
+  #   p queue[0].data
+
+  #   yield queue[0].data if block_given?
+
+  #   current.left = level_order(current.left)
+  #   current.right = level_order(current.right)
+
+  #   queue.shift
+
+  #   return current
+  # end
+
+  def level_order()
+    return @root if !@root
+
+    queue = []
+    res_arr = []
+
+    queue << @root
+
+    while queue != []
+      queue.length.times do
+        node = queue.shift
+        res_arr << node.data
+        yield node if block_given?
+
+        queue << node.left if node.left
+        queue << node.right if node.right
+      end
+    end
+    res_arr
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
