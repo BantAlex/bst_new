@@ -18,3 +18,8 @@ p tree.level_order #[6,4,11,3,5,7,88,2,9]
 p tree.inorder #[2,3,4,5,6,7,9,11,88]
 p tree.preorder #[6,4,3,2,5,11,7,9,88]
 p tree.postorder #[2,3,5,4,9,7,88,11,6]
+tree.height_depth(5)
+tree.height_depth(11)
+tree.height_depth(4)
+tree.height_depth(7)
+p tree.height_depth(76)

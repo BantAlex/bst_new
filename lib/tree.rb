@@ -79,7 +79,7 @@ class Tree
         return current
       end
     end
-    return "Value not found in the tree"
+    return nil
   end
 
 
@@ -139,6 +139,32 @@ class Tree
       yield current if block_given?
     end
     result
+  end
+
+  def height_depth(value)
+    return nil if !find(value)
+    height = -1
+    depth = -1
+    queue = [@root]
+    level = 0
+
+    while queue.length > 0
+      queue.length.times do
+        node = queue.shift
+
+        if node.data == value
+          depth = level
+          queue = []
+        end
+          queue << node.left if node.left
+          queue << node.right if node.right
+        break if node.data == value
+      end
+    level += 1
+    end
+    height = level - depth - 1
+    p "height: #{height}"
+    p "depth: #{depth}"
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
