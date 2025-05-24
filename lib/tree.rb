@@ -163,9 +163,27 @@ class Tree
     level += 1
     end
     height = level - depth - 1
-    p "height: #{height}"
-    p "depth: #{depth}"
+    return [height,depth]
   end
+
+  def balanced?
+    return @root if !@root
+
+    nodes = []
+    level_order{|node| nodes << node}
+    heights = []
+
+    nodes.map{|node|
+      left = height_depth(node.left.data)[0] if node.left
+      right = height_depth(node.right.data)[0] if node.right
+      if left && right
+        heights << left - right
+      end
+    }
+    return true if heights.all? {|height| height.between?(0,1)}
+    false
+  end
+
 
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right

@@ -23,3 +23,14 @@ tree.height_depth(11)
 tree.height_depth(4)
 tree.height_depth(7)
 p tree.height_depth(76)
+p 'here'
+
+p tree.balanced?
+
+tree.insert(1000)
+tree.insert(1400)
+tree.insert(16700)
+tree.insert(1040)
+tree.insert(10410)
+tree.insert(1020)
+tree.pretty_print
